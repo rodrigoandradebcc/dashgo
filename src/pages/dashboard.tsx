@@ -2,62 +2,44 @@ import { Sidebar } from "../components/Sidebar";
 import { Box, Flex, SimpleGrid, Text, theme } from "@chakra-ui/react";
 import { Header } from "../components/Header";
 import dynamic from 'next/dynamic';
+import { ApexOptions } from "apexcharts";
 
-const Chart = dynamic(() => import('react-apexcharts'), {
-    ssr: false
-});
+const Chart = dynamic(() => import('react-apexcharts'), { ssr: false });
 
-const options = {
-    chart: {
-        toolbar: {
-            show: false,
-        },
-        zoom: {
-            enable: false,
-        },
-        foreColor: theme.colors.gray[500],
+const options: ApexOptions = {
+  chart: {
+    toolbar: { show: false },
+    zoom: { enabled: false },
+    foreColor: theme.colors.gray['500'],
+  },
+  grid: { show: false },
+  dataLabels: { enabled: false },
+  tooltip: { enabled: false },
+  xaxis: {
+    type: 'datetime',
+    axisBorder: { color: theme.colors.gray['600'] },
+    axisTicks: { color: theme.colors.gray['600'] },
+    categories: [
+      '2021-04-02T00:00:00:00.000Z',
+      '2021-04-03T00:00:00:00.000Z',
+      '2021-04-04T00:00:00:00.000Z',
+      '2021-04-05T00:00:00:00.000Z',
+      '2021-04-06T00:00:00:00.000Z',
+      '2021-04-07T00:00:00:00.000Z',
+    ],
+  },
+  fill: {
+    opacity: 0.3,
+    type: 'gradient',
+    gradient: {
+      shade: 'dark',
+      opacityFrom: 0.7,
+      opacityTo: 0.3,
     },
-    grid: {
-        show: false,
-    },
-    dataLabels: {
-        enabled: false,
-    },
-    tooltip: {
-        enabled: false,
-    },
-    xaxis: {
-        type: 'datetime',
-        axisBorder: {
-            color: theme.colors.gray[600],
-        },
-        axisTicks: {
-            color: theme.colors.gray[600],
-        },
-        categories: [
-            '2023-01-17T00:00:00.000Z',
-            '2023-01-18T00:00:00.000Z', 
-            '2023-01-19T00:00:00.000Z', 
-            '2023-01-20T00:00:00.000Z', 
-            '2023-01-21T00:00:00.000Z', 
-            '2023-01-22T00:00:00.000Z',
-            '2023-01-23T00:00:00.000Z', 
-        ]
-    },
-    fill: {
-        opacity: 0.3,
-        type: 'gradient',
-        gradient: {
-            shade: 'dark',
-            opacityFrom: 0.7,
-            opacityTo: 0.3,
-        }
-    }
-} as ApexCharts.ApexOptions;
+  },
+};
 
-const series = [
-    {name: 'series1', data: [31, 220, 54, 85, 46, 15, 99]}
-];
+const series = [{ name: 'series1', data: [57, 36, 13, 29, 6, 19] }];
 
 export default function Dashboard() {
     return (
