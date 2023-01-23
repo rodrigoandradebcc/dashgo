@@ -1,8 +1,8 @@
-import { Sidebar } from "../components/Sidebar";
-import { Box, Flex, SimpleGrid, Text, theme } from "@chakra-ui/react";
-import { Header } from "../components/Header";
+import { Header } from '@/components/Header';
+import { Sidebar } from '@/components/Sidebar';
+import { Box, Flex, SimpleGrid, Text, theme } from '@chakra-ui/react';
+import { ApexOptions } from 'apexcharts';
 import dynamic from 'next/dynamic';
-import { ApexOptions } from "apexcharts";
 
 const Chart = dynamic(() => import('react-apexcharts'), { ssr: false });
 
@@ -42,43 +42,45 @@ const options: ApexOptions = {
 const series = [{ name: 'series1', data: [57, 36, 13, 29, 6, 19] }];
 
 export default function Dashboard() {
-    return (
-       <Flex direction="column" h="100vh">
-        <Header />
-        <Flex w="100%" my="6" maxWidth={1400} mx="auto" px="6">
-            <Sidebar />
+  return (
+    <Flex direction="column" height="100vh">
+      <Header />
 
-            <SimpleGrid flex="1" gap="4" minChildWidth="320px" alignContent="flex-start">
-                <Box
-                    p="8"
-                    bg="gray.800"
-                    borderRadius={8}
-                    pb="4"
-                >
-                    <Text
-                        fontSize="lg"
-                        mb="4"
-                    >
-                        Inscritos da semana
-                    </Text>
-                    <Chart options={options} series={series} type="area" height={160} />
-                </Box>
-                <Box
-                    p="8"
-                    bg="gray.800"
-                    borderRadius={8}
-                    pb="4"
-                >
-                    <Text
-                        fontSize="lg"
-                        mb="4"
-                    >
-                        Taxa de abertura
-                    </Text>
-                    <Chart options={options} series={series} type="area" height={160} />
-                </Box>
-            </SimpleGrid>
-        </Flex>
-       </Flex> 
-    );
+      <Flex
+        width="100%"
+        maxWidth={1480}
+        marginY="6"
+        marginX="auto"
+        paddingX="6"
+      >
+        <Sidebar />
+
+        <SimpleGrid flex="1" gap="4" minChildWidth="320px" alignContent="flex-start">
+          <Box
+            padding={['6', '8']}
+            bg="gray.800"
+            borderRadius={8}
+            paddingBottom="4"
+          >
+            <Text fontSize="lg" marginBottom="4">
+              Inscritos da semana
+            </Text>
+            <Chart options={options} series={series} type="area" height={160} />
+          </Box>
+
+          <Box
+            padding={['6', '8']}
+            bg="gray.800"
+            borderRadius={8}
+            paddingBottom="4"
+          >
+            <Text fontSize="lg" marginBottom="4">
+              Taxa de abertura
+            </Text>
+            <Chart options={options} series={series} type="area" height={160} width="100%" />
+          </Box>
+        </SimpleGrid>
+      </Flex>
+    </Flex>
+  );
 }
